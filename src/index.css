@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	--color-base-text: 44, 56, 47;
+}
+
+.card-text {
+	color: rgb(var(--color-base-text));
+}
+
+.product-details {
+	display: flex;
+}
+
+.product-image {
+	flex-grow: 2;
+}
+.product-info {
+	flex-grow: 1;
+}
+.show {
+	display: block;
+}
