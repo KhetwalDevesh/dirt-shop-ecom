@@ -3,16 +3,36 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "./Home";
 import clsx from "clsx";
+import useStore from "../store";
+
+interface productDetailsProps {
+	name: string;
+	image: Array<string>;
+	price: number;
+	description: string;
+	countInStock: number;
+}
 
 const ProductDetails = () => {
 	const { id } = useParams();
-	const [productDetails, setProductDetails] = useState([]);
+	const [productDetails, setProductDetails] = useState();
 	const [images, setImages] = useState([]);
+	const {
+		cartItems,
+		addItemToCart,
+		removeItemFromCart,
+		increaseQuantity,
+		decreaseQuantity,
+		clearCartItems,
+	} = useStore();
+	const [productQuantity, setProductQuantity] = useState(1);
 	useEffect(() => {
 		const fetchProductDetails = async () => {
 			try {
 				const response = await axios.get(`${baseURL}/products/${id}`);
 				setProductDetails(response.data);
+				// console.log("productDetails", JSON.stringify(productDetails, null, 2));
+				console.log("response", JSON.stringify(response.data, null, 2));
 				setImages(response.data.image);
 				console.log("productDetails", JSON.stringify(productDetails, null, 2));
 			} catch (error) {
@@ -21,6 +41,7 @@ const ProductDetails = () => {
 			}
 		};
 		fetchProductDetails();
+		// clearCartItems();
 	}, []);
 	return (
 		<div className="product-details min-h-screen w-screen p-12 bg-lemon-light flex">
@@ -28,6 +49,7 @@ const ProductDetails = () => {
 				{images.map((image, index) => {
 					return (
 						<img
+							key={image}
 							src={image}
 							className={clsx("h-[30rem]", {
 								"col-start-1 col-span-6 h-[60rem]": index == 0,
@@ -39,13 +61,13 @@ const ProductDetails = () => {
 			</div>
 			<div className="product-info flex flex-col font-outfit gap-4 px-[4rem]">
 				<span className="text-[1.6rem] text-[#191919] font-extrabold tracking-[.06rem]">
-					{productDetails.name}
+					{productDetails?.name}
 				</span>
 				<span className="text-[20px] leading-[24px] tracking-[.06rem]  text-[#474747] font-semibold">
-					${productDetails.price} USD
+					₹{productDetails?.price}
 				</span>
 				<span className="text-[17px] leading-[24px] tracking-[.06rem] text-[#474747] font-semibold">
-					{productDetails.description}
+					{productDetails?.description}
 				</span>
 				<div className="mt-[40px]">
 					<span className=" text-[16px] leading-[24px] tracking-[.06rem] text-[#474747] font-semibold">
@@ -53,22 +75,41 @@ const ProductDetails = () => {
 					</span>
 					<div className="flex space-x-8 border-2 border-[#764135] my-4 p-4 w-fit rounded-full">
 						<svg
+							onClick={() => {
+								productQuantity === productDetails?.countInStock
+									? () => {
+											removeItemFromCart({ itemId: productDetails?._id });
+									  }
+									: setProductQuantity(
+											(productQuantity: number) => productQuantity - 1
+									  );
+							}}
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
 							strokeWidth={1.5}
 							stroke="currentColor"
-							className="w-6 h-6 text-[#764135]">
+							className="w-6 h-6 text-[#764135] cursor-pointer">
 							<path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
 						</svg>
-						<span className="text-[#764135] font-bold">1</span>
+						<span className="text-[#764135] font-bold">{productQuantity}</span>
 						<svg
+							onClick={() => {
+								productQuantity === productDetails?.countInStock
+									? () => {
+											alert("no more items in stock");
+											return;
+									  }
+									: setProductQuantity(
+											(productQuantity: number) => productQuantity + 1
+									  );
+							}}
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
 							strokeWidth={1.5}
 							stroke="currentColor"
-							className="w-6 h-6 text-[#764135]">
+							className="w-6 h-6 text-[#764135] cursor-pointer">
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"
@@ -79,7 +120,22 @@ const ProductDetails = () => {
 				</div>
 
 				<div className="flex">
-					<button className="text-[24px] py-[10px] px-[25px] leading-1 tracking-[.1rem] bg-[#D4E07D] font-bold rounded-full">
+					<button
+						className="text-[24px] py-[10px] px-[25px] leading-1 tracking-[.1rem] bg-[#D4E07D] font-bold rounded-full"
+						onClick={() => {
+							addItemToCart({
+								item: {
+									_id: productDetails?._id,
+									name: productDetails?.name,
+									image: productDetails?.image,
+									price: productDetails?.price,
+									category: productDetails?.category,
+									description: productDetails?.description,
+									countInStock: productDetails?.countInStock,
+									productQuantity,
+								},
+							});
+						}}>
 						ADD TO CART
 					</button>
 					<button className="bg-[#D4E07D] rounded-full flex justify-center items-center p-[20px]">
