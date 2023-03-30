@@ -13,6 +13,24 @@ module.exports = {
 				outfit: ["Outfit", "sans-serif"],
 			},
 		},
+		screens: {
+			"2xl": { max: "1500px" },
+			// => @media (max-width: 1535px) { ... }
+
+			xl: { max: "1279px" },
+			// => @media (max-width: 1279px) { ... }
+
+			lg: { max: "1079px" },
+			// => @media (max-width: 1023px) { ... }
+
+			mdlg: { max: "950px" },
+
+			md: { max: "830px" },
+			// => @media (max-width: 767px) { ... }
+
+			sm: { max: "639px" },
+			// => @media (max-width: 639px) { ... }
+		},
 	},
 	plugins: [],
 };
