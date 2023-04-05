@@ -74,7 +74,7 @@ const Checkout = () => {
 	};
 
 	return (
-		<div className="payment-form mt-12 p-8 relative">
+		<div className="sm3:p-4 payment-form mt-12 p-8 relative">
 			<form id="payment-form" onSubmit={handleSubmit}>
 				<LinkAuthenticationElement
 					id="link-authentication-element"
@@ -85,13 +85,13 @@ const Checkout = () => {
 					<button
 						disabled={isLoading || !stripe || !elements}
 						id="submit"
-						className="bg-[#1e2a27] text-xl rounded-md p-5 text-white">
+						className="sm3:p-3 bg-[#1e2a27] text-xl rounded-md p-5 text-white">
 						<span id="button-text">
 							{isLoading ? (
 								<div className="spinner" id="spinner"></div>
 							) : (
 								<div className="flex justify-center ">
-									<span className="">Pay Now</span>
+									<span className="sm3:text-base">Pay Now</span>
 								</div>
 							)}
 						</span>

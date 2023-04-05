@@ -16,30 +16,36 @@ const Payment = () => {
 		clientSecret,
 	};
 	return (
-		<div className="p-36 border-t-2 border-gray-400 bg-lemon-light">
-			<div className="flex gap-96">
-				<div className="flex gap-20">
-					<span className="text-xl">
+		<div className="sm3:px-8 md:p-12 lg:p-16 p-36 border-t-2 border-gray-400 bg-lemon-light">
+			<div className="md:gap-8 md:flex-col flex justify-between">
+				<div className="sm2:gap-8 md:gap-12 flex gap-20 lg:gap-16">
+					<span className="sm3:text-lg sm2:w-[120px] md:w-[150px] text-xl">
 						<b>Delivery Address</b>
 					</span>
-					<div className="flex flex-col">
+					<div className="sm3:text-sm flex flex-col">
 						<div>
 							<span>{orderDetails.contactInfo.firstName}</span>{" "}
 							<span>{orderDetails.contactInfo.lastName}</span>
 						</div>
-						<span>Mobile : {orderDetails.contactInfo.phone}</span>
-						<span>{orderDetails.deliveryAddress.address}</span>
-						<span>Pincode : {orderDetails.deliveryAddress.pincode}</span>
+						<span className="whitespace-nowrap">
+							Mobile : {orderDetails.contactInfo.phone}
+						</span>
+						<span className="whitespace-nowrap">
+							{orderDetails.deliveryAddress.address}
+						</span>
+						<span className="whitespace-nowrap">
+							Pincode : {orderDetails.deliveryAddress.pincode}
+						</span>
 						<span>{orderDetails.deliveryAddress.city}</span>
 						<span>{orderDetails.deliveryAddress.state}</span>
 						<span>{orderDetails.deliveryAddress.country}</span>
 					</div>
 				</div>
-				<div className="flex gap-20 ">
-					<span className="text-xl">
+				<div className="sm2:gap-8 md:gap-12 lg:gap-16 flex gap-20 ">
+					<span className="sm3:text-lg sm2:w-[120px] md:w-[150px] text-xl">
 						<b>Order Total </b>
 					</span>
-					<span>₹{orderDetails.orderAmount}</span>
+					<span className="sm3:text-sm">₹{orderDetails.orderAmount}</span>
 				</div>
 			</div>
 			<div className="">

@@ -12,7 +12,7 @@ import Shipping from "./pages/Shipping";
 import Success from "./pages/Success";
 function App() {
 	return (
-		<div className="bg-lemon-light">
+		<div className="bg-lemon-light overflow-x-hidden">
 			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />

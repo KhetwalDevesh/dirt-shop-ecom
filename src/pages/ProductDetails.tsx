@@ -4,19 +4,23 @@ import axios from "axios";
 import { baseURL } from "./Home";
 import clsx from "clsx";
 import useStore from "../store";
+import { toast, Toaster } from "react-hot-toast";
 
 interface productDetailsProps {
+	_id: string;
 	name: string;
 	image: Array<string>;
 	price: number;
 	description: string;
 	countInStock: number;
+	category: string;
 }
 
 const ProductDetails = () => {
 	const { id } = useParams();
-	const [productDetails, setProductDetails] = useState();
+	const [productDetails, setProductDetails] = useState<productDetailsProps>();
 	const [images, setImages] = useState([]);
+	const [loading, setLoading] = useState<boolean>();
 	const {
 		cartItems,
 		addItemToCart,
@@ -29,8 +33,10 @@ const ProductDetails = () => {
 	useEffect(() => {
 		const fetchProductDetails = async () => {
 			try {
+				setLoading(true);
 				const response = await axios.get(`${baseURL}/products/${id}`);
 				setProductDetails(response.data);
+				setLoading(false);
 				// console.log("productDetails", JSON.stringify(productDetails, null, 2));
 				console.log("response", JSON.stringify(response.data, null, 2));
 				setImages(response.data.image);
@@ -43,23 +49,35 @@ const ProductDetails = () => {
 		fetchProductDetails();
 		// clearCartItems();
 	}, []);
+
+	if (loading)
+		return (
+			<div className="loading flex justify-center items-center w-screen min-h-screen">
+				<div className="circle-loader"></div>
+			</div>
+		);
+
 	return (
-		<div className="product-details min-h-screen w-screen p-12 bg-lemon-light flex">
-			<div className="product-image grid grid-cols-6 gap-y-[8px] gap-x-[20px]">
+		<div className="sm:gap-8 sm:flex-col sm:px-8 product-details min-h-screen w-[100vw] p-12 bg-lemon-light flex">
+			<Toaster />
+			<div className="product-image grid grid-cols-6 gap-y-[8px]">
 				{images.map((image, index) => {
 					return (
 						<img
 							key={image}
 							src={image}
 							className={clsx("h-[30rem]", {
-								"col-start-1 col-span-6 h-[60rem]": index == 0,
-								"col-start-1 col-span-3": index % 2 == 1,
-								"col-start-4 col-span-3": index % 2 == 0 && index != 0,
+								"md:h-[20rem] lg:h-[30rem] col-start-1 col-span-6 h-[60rem]":
+									index == 0,
+								"sm:hidden md:h-[20rem] lg:h-[15rem] md:col-span-6 col-start-1 col-span-3 xl:h-[20rem]":
+									index % 2 == 1,
+								"sm:hidden md:h-[20rem] lg:h-[15rem] md:col-start-1 md:col-span-6 col-start-4 col-span-3 xl:h-[20rem]":
+									index % 2 == 0 && index != 0,
 							})}></img>
 					);
 				})}
 			</div>
-			<div className="product-info flex flex-col font-outfit gap-4 px-[4rem]">
+			<div className="sm:px-0 md:px-[2rem] min-h-screen product-info flex flex-col font-outfit gap-4 px-[4rem]">
 				<span className="text-[1.6rem] text-[#191919] font-extrabold tracking-[.06rem]">
 					{productDetails?.name}
 				</span>
@@ -69,7 +87,7 @@ const ProductDetails = () => {
 				<span className="text-[17px] leading-[24px] tracking-[.06rem] text-[#474747] font-semibold">
 					{productDetails?.description}
 				</span>
-				<div className="mt-[40px]">
+				<div className="sm:mt-0 mt-[40px]">
 					<span className=" text-[16px] leading-[24px] tracking-[.06rem] text-[#474747] font-semibold">
 						QUANTITY
 					</span>
@@ -121,7 +139,7 @@ const ProductDetails = () => {
 
 				<div className="flex">
 					<button
-						className="text-[24px] py-[10px] px-[25px] leading-1 tracking-[.1rem] bg-[#D4E07D] font-bold rounded-full"
+						className="sm3:px-[20px] sm3:text-[16px] text-[24px] py-[10px] px-[25px] leading-1 tracking-[.1rem] bg-[#D4E07D] font-bold rounded-full"
 						onClick={() => {
 							addItemToCart({
 								item: {
@@ -132,9 +150,10 @@ const ProductDetails = () => {
 									category: productDetails?.category,
 									description: productDetails?.description,
 									countInStock: productDetails?.countInStock,
-									productQuantity,
+									quantity: productQuantity,
 								},
 							});
+							toast.success("Item added to Cart");
 						}}>
 						ADD TO CART
 					</button>

@@ -4,6 +4,7 @@ import useStore from "../store";
 
 const Header = () => {
 	const [totalItemsInCart, setTotalItemsInCart] = useState(0);
+	const [isClickedThreeBar, setIsClickedThreeBar] = useState(false);
 	const { cartItems } = useStore();
 	const navigate = useNavigate();
 
@@ -18,8 +19,68 @@ const Header = () => {
 	);
 
 	return (
-		<div className="bg-lemon-light flex justify-between py-[2rem] px-[4rem]">
-			<div className="font-outfit text-[15px] flex gap-6 font-normal">
+		<div className="sm:px-[2rem] bg-lemon-light flex justify-between py-[2rem] px-[4rem]">
+			<div className="hidden sm:block">
+				{isClickedThreeBar ? (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6 cursor-pointer"
+						onClick={() => {
+							setIsClickedThreeBar(false);
+						}}>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M6 18L18 6M6 6l12 12"
+						/>
+					</svg>
+				) : (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6 cursor-pointer"
+						onClick={() => {
+							setIsClickedThreeBar(true);
+						}}>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+						/>
+					</svg>
+				)}
+
+				{isClickedThreeBar ? (
+					<div className="bg-lemon-light absolute flex flex-col mt-[8px]  sm:text-[14px] font-outfit gap-2 border-[1px] border-gray-400  p-3 py-4 rounded-md">
+						<Link
+							to={"/"}
+							className="hover:text-[#DD7339] hover:border-b-[1px] hover:border-[#DD7339] tracking-[.04rem]">
+							HOME
+						</Link>
+						<Link
+							to={"/catalog"}
+							className="hover:text-[#DD7339] hover:border-b-[1px] hover:border-[#DD7339] tracking-[.04rem]">
+							CATALOG
+						</Link>
+						<Link
+							to={"/"}
+							className="hover:text-[#DD7339] hover:border-b-[1px] hover:border-[#DD7339] tracking-[.04rem]">
+							CONTACT
+						</Link>
+					</div>
+				) : (
+					<div></div>
+				)}
+			</div>
+
+			<div className="font-outfit sm:hidden sm:text-[13px] sm:gap-3 text-[15px] flex gap-6 font-normal">
 				<Link
 					to={"/"}
 					className="hover:text-[#DD7339] hover:border-b-[1px] hover:border-[#DD7339] tracking-[.04rem]">
@@ -36,7 +97,8 @@ const Header = () => {
 					CONTACT
 				</Link>
 			</div>
-			<h1 className="w-60">
+
+			<h1 className="sm2:flex sm2:justify-center sm:w-32 w-60">
 				<svg
 					onClick={() => {
 						navigate("/");
@@ -92,7 +154,7 @@ const Header = () => {
 							d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
 						/>
 					</svg>
-					<span className="bg-black text-[#D4E07D] h-[16px] w-[16px] rounded-full absolute top-11 right-16 flex justify-center items-center text-[10px]">
+					<span className="bg-black cart-item-count text-[#D4E07D] h-[16px] w-[16px] rounded-full absolute flex justify-center items-center text-[10px]">
 						{countTotalItemsInCart}
 					</span>
 				</Link>

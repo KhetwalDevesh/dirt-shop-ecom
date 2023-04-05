@@ -61,7 +61,7 @@ const Shipping = () => {
 			console.log("response", JSON.stringify(response, null, 2));
 			console.log("response", JSON.stringify(response, null, 2));
 			if (response.data.clientSecret) {
-				addClientSecret(response.data.clientSecret);
+				addClientSecret({ value: response.data.clientSecret });
 				navigate("/payment", { state: { orderResponse: response.data } });
 			}
 		} catch (error) {
@@ -73,8 +73,8 @@ const Shipping = () => {
 		calculateShippingTotal();
 	}, []);
 	return (
-		<div className="min-h-screen flex">
-			<div className="w-1/2 bg-lemon-light min-h-screen border-t-[1px] border-gray-400 px-20 py-10">
+		<div className="sm2:flex-col min-h-screen flex">
+			<div className="sm2:w-full sm:px-10 w-1/2 bg-lemon-light min-h-screen border-t-[1px] border-gray-400 px-20 py-10">
 				<form className="flex flex-col">
 					<div className="flex flex-col gap-4">
 						<label>Contact Information</label>
@@ -99,18 +99,18 @@ const Shipping = () => {
 							{...register("country")}
 							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
 						/>
-						<div className="my-4 flex justify-between">
-							<input
-								placeholder="First Name"
-								{...register("firstName")}
-								className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
-							/>
-							<input
-								placeholder="Last Name"
-								{...register("lastName")}
-								className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
-							/>
-						</div>
+						{/* <div className="my-4 flex justify-between"> */}
+						<input
+							placeholder="First Name"
+							{...register("firstName")}
+							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
+						/>
+						<input
+							placeholder="Last Name"
+							{...register("lastName")}
+							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
+						/>
+						{/* </div> */}
 
 						<input
 							placeholder="Address"
@@ -118,23 +118,23 @@ const Shipping = () => {
 							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
 						/>
 
-						<div className="my-4 flex justify-between">
-							<input
-								placeholder="City"
-								{...register("city")}
-								className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
-							/>
-							<input
-								placeholder="State"
-								{...register("state")}
-								className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
-							/>
-							<input
-								placeholder="Pincode"
-								{...register("pincode")}
-								className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
-							/>
-						</div>
+						{/* <div className="my-4 flex justify-between"> */}
+						<input
+							placeholder="City"
+							{...register("city")}
+							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
+						/>
+						<input
+							placeholder="State"
+							{...register("state")}
+							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
+						/>
+						<input
+							placeholder="Pincode"
+							{...register("pincode")}
+							className="border-[1px] p-4 bg-lemon-light border-[#afafa6] rounded-sm outline-0 bg-transparent"
+						/>
+						{/* </div> */}
 					</div>
 
 					<div>
@@ -146,7 +146,7 @@ const Shipping = () => {
 					</div>
 				</form>
 			</div>
-			<div className="w-1/2 bg-[#D4E07D] min-h-screen border-t-[1px] border-l-[1px] border-gray-400 p-8">
+			<div className="sm2:w-full sm2:min-h-full w-1/2 bg-[#D4E07D] min-h-screen border-t-[1px] border-l-[1px] border-gray-400 p-8">
 				<div className="flex flex-col gap-4">
 					{cartItems.map((cartItem) => {
 						return (
@@ -154,7 +154,7 @@ const Shipping = () => {
 								<div className="flex gap-4 ">
 									<div className="relative">
 										<img
-											src={cartItem?._image}
+											src={`${cartItem?.image}`}
 											className="h-[100px] w-[100px]"
 										/>
 										<span className="bg-black text-[#D4E07D] h-[16px] w-[16px] rounded-full absolute -top-1 -right-2 flex justify-center items-center text-[10px] absolute">

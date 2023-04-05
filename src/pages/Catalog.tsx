@@ -16,21 +16,22 @@ interface productItemProps {
 
 const Catalog = () => {
 	const navigate = useNavigate();
-
-	const handleCategoryFilter = (e) => {
+	const [loading, setLoading] = useState<boolean>();
+	const [mouseEntered, setMouseEntered] = useState<string>("");
+	const handleCategoryFilter = (e: string) => {
 		const filterClassSelector = document.querySelector(`.category`);
 		filterClassSelector?.classList.toggle("show");
 	};
 
-	const handleCostFilter = (e) => {
+	const handleCostFilter = (e: string) => {
 		const filterClassSelector = document.querySelector(`.cost`);
 		filterClassSelector?.classList.toggle("show");
 	};
 
 	window.onclick = (e) => {
 		console.log(e);
-		console.log(e.target.classList[0]);
-		if (e.target.classList[0] == "dropbtn") {
+		console.log(e.target?.classList[0]);
+		if (e.target?.classList[0] == "dropbtn") {
 			return;
 		}
 		const filterClasses = document.getElementsByClassName("filter");
@@ -46,8 +47,10 @@ const Catalog = () => {
 	useEffect(() => {
 		const fetchProducts = async () => {
 			try {
+				setLoading(true);
 				const response = await axios.get(`${baseURL}/products`);
 				setProducts(response.data);
+				setLoading(false);
 				console.log("products", JSON.stringify(products, null, 2));
 			} catch (error) {
 				console.log("error in fetchProducts", error);
@@ -57,27 +60,52 @@ const Catalog = () => {
 		fetchProducts();
 	}, []);
 
+	if (loading)
+		return (
+			<div className="loading flex justify-center items-center w-screen min-h-screen">
+				<div className="circle-loader"></div>
+			</div>
+		);
+
 	return (
-		<div className="bg-lemon-light min-h-screen ">
-			<h1 className="text-[48px] leading-[60px] mx-[3.5rem] py-[1rem] tracking-[.06rem] text-[#DD7339]">
+		<div className="bg-lemon-light min-h-screen pt-[60px]">
+			<h1
+				className={`sm4:text-[42px] sm4:ml-[3rem] sm3:ml-[4rem] text-[48px] leading-[60px] mx-[3.5rem] ml-[5rem] py-[1rem] tracking-[.06rem] text-[#DD7339]`}>
 				Products
 			</h1>
-			<div className="px-[4rem] my-[30px] grid grid-cols-3 gap-[20px]">
+			<div className="my-[30px] flex flex-wrap basis-4/12 justify-between px-[60px]">
 				{products.map((productItem: productItemProps) => {
 					return (
-						<div
-							key={productItem._id}
-							onClick={() => {
-								navigate(`/product/${productItem._id}`);
-							}}
-							className="w-fit cursor-pointer">
-							<img
-								src={productItem.image}
-								className="dirt-hat w-[25rem] h-[25rem] rounded-2xl"
-							/>
-							<div className="flex justify-between w-[25rem] py-[1.7rem] pb-0 font-outfit text-[18px] font-semibold text-[#2C382F] leading-[28px] tracking-[.06rem]">
-								<h3>{productItem.name}</h3>
-								<h3>{`₹${productItem.price}`}</h3>
+						<div className="flex sm:justify-center sm:w-full mb-[30px]">
+							<div
+								key={productItem._id}
+								onClick={() => {
+									navigate(`/product/${productItem._id}`);
+								}}
+								className="cursor-pointer"
+								onMouseEnter={() => {
+									setMouseEntered(productItem._id);
+								}}
+								onMouseLeave={() => {
+									setMouseEntered("");
+								}}>
+								{mouseEntered === productItem._id ? (
+									<div className="overflow-hidden rounded-2xl">
+										<img
+											src={productItem.image[1]}
+											className="onMouseEnterImage dirt-hat sm4:w-[12rem] sm4:h-[12rem] sm3:w-[15rem] sm3:h-[15rem] sm2:w-[20rem] sm2:h-[20rem] sm:w-[25rem] sm:h-[25rem] md:w-[12rem] md:h-[12rem] lg:w-[17rem] lg:h-[17rem] xl:w-[22rem] xl:h-[22rem] 2xl:w-[28rem] 2xl:h-[28rem] w-[35rem] h-[35rem] rounded-2xl"
+										/>
+									</div>
+								) : (
+									<img
+										src={productItem.image[0]}
+										className="dirt-hat sm4:w-[12rem] sm4:h-[12rem] sm3:w-[15rem] sm3:h-[15rem] sm2:w-[20rem] sm2:h-[20rem] sm:w-[25rem] sm:h-[25rem] md:w-[12rem] md:h-[12rem] lg:w-[17rem] lg:h-[17rem] xl:w-[22rem] xl:h-[22rem] 2xl:w-[28rem] 2xl:h-[28rem] w-[35rem] h-[35rem] rounded-2xl"
+									/>
+								)}
+								<div className="sm4:w-[12rem] sm3:w-[15rem] sm2:w-[20rem]  sm:w-[25rem] md:text-[16px] md:w-[12rem] lg:w-[17rem] xl:w-[22rem] 2xl:w-[28rem] flex justify-between w-[35rem] py-[1.7rem] pb-0 font-outfit text-[18px] font-semibold text-[#2C382F] leading-[28px] tracking-[.06rem]">
+									<h3>{productItem.name}</h3>
+									<h3>{`₹${productItem.price}`}</h3>
+								</div>
 							</div>
 						</div>
 					);
