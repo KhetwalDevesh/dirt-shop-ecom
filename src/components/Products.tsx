@@ -41,7 +41,7 @@ const Products = () => {
 		);
 
 	return (
-		<div className="sm:px-[30px] my-[30px] flex flex-wrap basis-4/12  justify-between px-[80px]">
+		<div className="sm:px-[30px] my-[30px] flex flex-wrap basis-4/12  justify-between px-[100px]">
 			{products.map((productItem: productItemProps) => {
 				return (
 					<div className="flex sm:justify-center sm:w-full mb-[40px]">
