@@ -74,7 +74,7 @@ const Catalog = () => {
 				className={`sm4:text-[42px] sm4:ml-[3rem] sm3:ml-[4rem] text-[48px] leading-[60px] mx-[3.5rem] ml-[5rem] py-[1rem] tracking-[.06rem] text-[#DD7339]`}>
 				Products
 			</h1>
-			<div className="my-[30px] flex flex-wrap basis-4/12 justify-between px-[60px]">
+			<div className="my-[30px] flex flex-wrap basis-4/12 justify-between px-[80px]">
 				{products.map((productItem: productItemProps) => {
 					return (
 						<div className="flex sm:justify-center sm:w-full mb-[30px]">
