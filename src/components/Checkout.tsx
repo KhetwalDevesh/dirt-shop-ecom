@@ -11,9 +11,9 @@ const Checkout = () => {
 	const stripe = useStripe();
 	const elements = useElements();
 
-	const [email, setEmail] = useState("");
-	const [message, setMessage] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
+	const [email, setEmail] = useState<any>("");
+	const [message, setMessage] = useState<string>("");
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	useEffect(() => {
 		if (!stripe) {
 			return;
@@ -46,6 +46,7 @@ const Checkout = () => {
 		});
 	}, [stripe]);
 
+	// @ts-ignore
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!stripe || !elements) {
@@ -78,6 +79,7 @@ const Checkout = () => {
 			<form id="payment-form" onSubmit={handleSubmit}>
 				<LinkAuthenticationElement
 					id="link-authentication-element"
+					// @ts-ignore
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<PaymentElement id="payment-element" />
