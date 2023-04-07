@@ -59,16 +59,16 @@ const Products = () => {
 								<div className="overflow-hidden rounded-2xl">
 									<img
 										src={productItem.image[1]}
-										className="onMouseEnterImage dirt-hat sm4:w-[12rem] sm4:h-[12rem] sm3:w-[15rem] sm3:h-[15rem] sm2:w-[20rem] sm2:h-[20rem] sm:w-[25rem] sm:h-[25rem] md:w-[12rem] md:h-[12rem] lg:w-[17rem] lg:h-[17rem] xl:w-[22rem] xl:h-[22rem] 2xl:w-[28rem] 2xl:h-[28rem] w-[35rem] h-[35rem] rounded-2xl"
+										className="onMouseEnterImage dirt-hat sm4:w-[12rem] sm4:h-[12rem] sm3:w-[15rem] sm3:h-[15rem] sm2:w-[20rem] sm2:h-[20rem] sm:w-[25rem] sm:h-[25rem] md:w-[12rem] md:h-[12rem] lg:w-[17rem] lg:h-[17rem] xl:w-[20rem] xl:h-[20rem] 2xl:w-[28rem] 2xl:h-[28rem] w-[35rem] h-[35rem] rounded-2xl"
 									/>
 								</div>
 							) : (
 								<img
 									src={productItem.image[0]}
-									className="dirt-hat sm4:w-[12rem] sm4:h-[12rem] sm3:w-[15rem] sm3:h-[15rem] sm2:w-[20rem] sm2:h-[20rem] sm:w-[25rem] sm:h-[25rem] md:w-[12rem] md:h-[12rem] lg:w-[17rem] lg:h-[17rem] xl:w-[22rem] xl:h-[22rem] 2xl:w-[28rem] 2xl:h-[28rem] w-[35rem] h-[35rem] rounded-2xl"
+									className="dirt-hat sm4:w-[12rem] sm4:h-[12rem] sm3:w-[15rem] sm3:h-[15rem] sm2:w-[20rem] sm2:h-[20rem] sm:w-[25rem] sm:h-[25rem] md:w-[12rem] md:h-[12rem] lg:w-[17rem] lg:h-[17rem] xl:w-[20rem] xl:h-[20rem] 2xl:w-[28rem] 2xl:h-[28rem] w-[35rem] h-[35rem] rounded-2xl"
 								/>
 							)}
-							<div className="flex justify-between sm4:w-[12rem] sm3:w-[15rem] sm2:w-[20rem]  sm:w-[25rem] md:text-[16px] md:w-[12rem] lg:w-[17rem] xl:w-[22rem] 2xl:w-[28rem]  pt-[1.7rem] font-outfit text-[18px] w-[35rem]  font-semibold text-[#2C382F] leading-[28px] tracking-[.06rem]">
+							<div className="flex justify-between sm4:w-[12rem] sm3:w-[15rem] sm2:w-[20rem]  sm:w-[25rem] md:text-[16px] md:w-[12rem] lg:w-[17rem] xl:w-[20rem] 2xl:w-[28rem]  pt-[1.7rem] font-outfit text-[18px] w-[35rem]  font-semibold text-[#2C382F] leading-[28px] tracking-[.06rem]">
 								<h3>{productItem.name}</h3>
 								<h3>{`₹${productItem.price}`} </h3>
 							</div>
