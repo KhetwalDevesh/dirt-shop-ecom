@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store";
@@ -58,8 +58,6 @@ const Shipping = () => {
 				url: `${baseURL}/orders`,
 				data: { ...orderItem },
 			});
-			console.log("response", JSON.stringify(response, null, 2));
-			console.log("response", JSON.stringify(response, null, 2));
 			if (response.data.clientSecret) {
 				addClientSecret({ value: response.data.clientSecret });
 				navigate("/payment", { state: { orderResponse: response.data } });
