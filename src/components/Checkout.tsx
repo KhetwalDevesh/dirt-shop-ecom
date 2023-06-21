@@ -56,7 +56,7 @@ const Checkout = () => {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: `http://127.0.0.1:5173/success`,
+				return_url: `https://dirt-shop-ecom.netlify.app/success`,
 			},
 		});
 		if (error.type == "card_error" || error.type == "validation_error") {
