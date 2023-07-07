@@ -1,0 +1,56 @@
+export const fallbackProducts = [
+	{
+		_id: "64194b5151246a5a8f61c387",
+		name: "Rainy Dirty",
+		image: [
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/IMG_6672.jpg?v=1659376693&width=823",
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/IMG_6660.jpg?v=1659376693&width=823",
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/IMG_6717.jpg?v=1659376693&width=823",
+		],
+		price: 30,
+		category: "Clothing",
+		description: "Screen printed by Danger Press in Atlanta, GA. 100% Cotton",
+		countInStock: 10,
+		createdAt: "2023-03-21T06:14:41.787Z",
+		updatedAt: "2023-03-21T06:14:41.787Z",
+		__v: 0,
+	},
+	{
+		_id: "64194b7951246a5a8f61c38a",
+		name: "Friendship Dirt",
+		image: [
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/2.png?v=1659367833&width=823",
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/5.png?v=1659367893",
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/1.png?v=1659367893",
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/4.png?v=1659367893",
+			"https://cdn.shopify.com/s/files/1/0656/2424/4438/products/7.png?v=1659367833",
+		],
+		price: 50,
+		category: "Cosmetics",
+		description:
+			"A custom bracelet designed and made by Ian Charms. Each bracelet is slightly unique, and may vary from those pictured.",
+		countInStock: 10,
+		createdAt: "2023-03-21T06:15:21.171Z",
+		updatedAt: "2023-03-21T06:15:21.171Z",
+		__v: 0,
+	},
+	{
+		_id: "64a523b039689905b29c5808",
+		name: "Dirt Hat",
+		image: [
+			"https://res.cloudinary.com/dikpmkuiw/image/upload/v1679293876/IMG-7701_lncvqs.jpg",
+			"https://res.cloudinary.com/dikpmkuiw/image/upload/v1679293984/IMG-1922_zl1vap.jpg",
+			"https://res.cloudinary.com/dikpmkuiw/image/upload/v1679293984/IMG-1922_zl1vap.jpg",
+			"https://res.cloudinary.com/dikpmkuiw/image/upload/v1679293984/IMG-1922_zl1vap.jpg",
+			"https://res.cloudinary.com/dikpmkuiw/image/upload/v1679293984/IMG-1922_zl1vap.jpg",
+		],
+		price: 20,
+		category: "Clothing",
+		description:
+			"Introducing the epitome of timeless elegance and sartorial sophistication, behold the majestic Café Noir Couture brown hat, a true masterpiece that transcends mere headwear and elevates it to the realm of refined fashion statement.",
+		countInStock: 10,
+		createdAt: "2023-07-05T08:02:57.210Z",
+		updatedAt: "2023-07-05T08:02:57.210Z",
+		__v: 0,
+	},
+];
